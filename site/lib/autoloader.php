@@ -131,6 +131,9 @@ class Autoloader {
 
 	protected function isValidPath($fullPath) {
 		foreach ($this->validRoots as $root => $true) {
+			$root = str_replace('\\', '/', $root);		//ison.zhang
+			//var_dump(substr($fullPath, 0, strlen($root) + 1),  $root . '/');
+			error_log(substr($fullPath, 0, strlen($root) + 1)."\n".$root."\n\n", 3, "c:\\ison.log");
 			if (substr($fullPath, 0, strlen($root) + 1) === $root . '/') {
 				return true;
 			}
@@ -155,6 +158,7 @@ class Autoloader {
 			$pathsToRequire = array();
 			foreach ($this->findClass($class) as $path) {
 				$fullPath = stream_resolve_include_path($path);
+				$fullPath = str_replace('\\', '/', $fullPath);		//ison.zhang
 				if ($fullPath && $this->isValidPath($fullPath)) {
 					$pathsToRequire[] = $fullPath;
 				}

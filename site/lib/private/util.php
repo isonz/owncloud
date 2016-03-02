@@ -882,6 +882,7 @@ class OC_Util {
 		if (self::runningOnWindows()) {
 			//TODO: permissions checks for windows hosts
 		} else {
+			/*		//ison.zhang
 			$permissionsModHint = $l->t('Please change the permissions to 0770 so that the directory'
 				. ' cannot be listed by other users.');
 			$perms = substr(decoct(@fileperms($dataDirectory)), -3);
@@ -896,6 +897,7 @@ class OC_Util {
 					);
 				}
 			}
+			*/
 		}
 		return $errors;
 	}
@@ -910,6 +912,7 @@ class OC_Util {
 	public static function checkDataDirectoryValidity($dataDirectory) {
 		$l = \OC::$server->getL10N('lib');
 		$errors = [];
+		return $errors;		//ison.zhang
 		if (!self::runningOnWindows() && $dataDirectory[0] !== '/') {
 			$errors[] = [
 				'error' => $l->t('Data directory (%s) must be an absolute path', [$dataDirectory]),
@@ -1323,7 +1326,8 @@ class OC_Util {
 	 * @return bool true if running on Windows, false otherwise
 	 */
 	public static function runningOnWindows() {
-		return (substr(PHP_OS, 0, 3) === "WIN");
+		//return (substr(PHP_OS, 0, 3) === "WIN");
+		return false; 		//ison.zhang
 	}
 
 	/**
